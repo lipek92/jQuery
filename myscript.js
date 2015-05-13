@@ -1,5 +1,7 @@
 $(document).ready(function (){
-	
-	$('#name').validateText();
+
+	$("#surname").validateText();
+	$("#name").validateText( {pattern: /^[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłóńśźż]*$/} );
+
 	
 });
