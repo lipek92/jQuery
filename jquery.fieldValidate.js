@@ -22,7 +22,7 @@
 				$(this).addClass("error");
 			}
 			checkInputs();
-		})
+		});
 		
 	};
 
@@ -48,14 +48,14 @@
 				$(this).addClass("error");
 			}
 			checkInputs();
-		})
+		});
 		
 	};
 
-	checkInputs = function()
+	var checkInputs = function()
 	{
 		var error;
-		$("form :input[type=text]").each(function()
+		$("input[type=text]").each(function()
 		{
  			var input = $(this);
 
@@ -73,6 +73,6 @@
 		{
 			$('input[type="submit"]').removeAttr('disabled');
 		}
-	}
+	};
 
 })(jQuery);
