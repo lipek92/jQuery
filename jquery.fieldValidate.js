@@ -21,7 +21,9 @@
 			{
 				$(this).addClass("error");
 			}
+			checkInputs();
 		})
+		
 	};
 
 	$.fn.validateEmail = function(options) 
@@ -45,7 +47,32 @@
 			{
 				$(this).addClass("error");
 			}
+			checkInputs();
 		})
+		
 	};
+
+	checkInputs = function()
+	{
+		var error;
+		$("form :input[type=text]").each(function()
+		{
+ 			var input = $(this);
+
+ 			if (input.hasClass("error"))
+ 			{
+ 				error = true;
+ 			}
+		});
+
+		if (error)
+		{
+			$('input[type="submit"]').attr('disabled','disabled');
+		}
+		else
+		{
+			$('input[type="submit"]').removeAttr('disabled');
+		}
+	}
 
 })(jQuery);
