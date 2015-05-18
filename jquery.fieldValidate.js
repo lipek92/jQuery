@@ -1,4 +1,34 @@
 (function($) {
+	
+	$.fn.validateTest = function(options) {
+ 
+    var settings = $.extend({
+            pattern: "^[a-z]*$",
+        }, options );
+
+		var pattern = new RegExp(settings.pattern);
+
+		this.each(function(){
+			$(this).change(function ()
+			{
+			if (pattern.test(this.value))
+			{
+				if($(this).hasClass("error"))
+				{
+					$(this).removeClass("error");
+				}
+			}
+			else
+			{
+				$(this).addClass("error");
+			}
+			checkInputs(this);
+		});
+	});
+		
+		return this;
+ 
+};
 
 	$.fn.validateText = function(options) 
 	{
@@ -21,9 +51,10 @@
 			{
 				$(this).addClass("error");
 			}
-			checkInputs();
+			checkInputs(this);
 		});
 		
+		return this;
 	};
 
 	$.fn.validateEmail = function(options) 
@@ -47,15 +78,20 @@
 			{
 				$(this).addClass("error");
 			}
-			checkInputs();
+			checkInputs(this);
 		});
 		
+		return this;
 	};
 
-	var checkInputs = function()
-	{
+	var checkInputs = function(obj)
+	{		
+		var form = $(obj).parents('form');
+		var submit = form.find('input[type="submit"]');
+		var inputs = form.find('input[type="text"]');
+		
 		var error;
-		$("input[type=text]").each(function()
+		$(inputs).each(function()
 		{
  			var input = $(this);
 
@@ -67,11 +103,11 @@
 
 		if (error)
 		{
-			$('input[type="submit"]').attr('disabled','disabled');
+			submit.attr('disabled','disabled');
 		}
 		else
 		{
-			$('input[type="submit"]').removeAttr('disabled');
+			submit.removeAttr('disabled');
 		}
 	};
 
